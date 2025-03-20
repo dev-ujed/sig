@@ -1,0 +1,57 @@
+/*
+ * Sonata CSS Framework v0.3.1
+ * https://github.com/alexcandelas/sonata
+ * MIT License
+ */
+
+// =============================================================================
+// Contents
+// =============================================================================
+//
+// Settings ...... Global variables and configuration.
+// Tools ......... Mixins and functions.
+// Generic ....... Resets and normalization.
+// Elements ...... Unclassed HTML elements.
+// Objects ....... Layout and design patterns (no cosmetics).
+// Support ....... Simple styled elements and global animations.
+// Components .... Designed pieces of UI.
+// Utilities ..... Overrides and utility classes.
+
+
+
+@import "~/sonatacss/layers/_settings";
+
+@import "1-settings/colors";
+@import "1-settings/spacing";
+
+@import "2-tools/position";
+@import "2-tools/triangle";
+@import "2-tools/hamburguer";
+@import "2-tools/fluid";
+@import "2-tools/media";
+
+@import "5-objects/container";
+
+@import "~/sonatacss/layers/_tools";
+
+@import "~/sonatacss/layers/_generic";
+
+@import "~/sonatacss/layers/_elements";
+
+@import "~/sonatacss/layers/_abstractions";
+
+@import "~/sonatacss/layers/_components";
+
+@import "~/sonatacss/layers/_utilities";
+
+@import "7-components/inicio";
+@import "7-components/admin";
+@import "7-components/user-bar-admin";
+@import "7-components/dashboard-menu-admin";
+@import "7-components/dashboard-heading";
+@import "7-components/section";
+@import "7-components/buttons";
+@import "7-components/db-search-field";
+@import "7-components/dashboard-panel";
+@import "7-components/table-index";
+@import "7-components/pagination";

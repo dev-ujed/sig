@@ -1,0 +1,18 @@
+{
+	"type": "module",
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^5.2.1",
+		"django-vite-plugin": "^4.0.4",
+		"sass": "^1.85.1",
+		"sonatacss": "^0.3.1",
+		"vite": "^5.4.14",
+		"vue": "^3.5.13"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build"
+	},
+	"dependencies": {
+		"axios": "^1.8.3"
+	}
+}
