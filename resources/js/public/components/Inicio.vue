@@ -7,26 +7,7 @@
 					<img src="../../../../static/img/LogoUJEDvertical.png" alt="">
 				</div>
 				<div class="login__form">
-					<form @submit.prevent="submitForm">
-						<label for="correo">Correo electrónico</label>
-						<div class="input-container">
-							<img src="../../../../static/img/Icon mail.png" alt="icono" class="icon">
-							<input v-model="form.email" type="email" id="email" name="email" required>
-						</div>
-
-						<label for="password">Contraseña</label>
-						<div class="input-container">
-							<img src="../../../../static/img/Icon tabler key.png" alt="icono" class="icon">
-							<input v-model="form.password" type="password" id="password" name="password" required>
-						</div>
-
-						<!-- Mostrar el mensaje de error aquí -->
-						<div v-if="errors.message" class="error-message">
-							{{ errors.message }}
-						</div>
-
-						<button type="submit">Ingresar</button>
-					</form>
+					<button @click="login">Google</button>
 				</div>
 			</div>
 		</div>
@@ -48,15 +29,8 @@
 			};
 		},
 		methods: {
-			async submitForm() {
-				console.log(document.body.getAttribute("data-root"));
-				try {
-					const response = await window.axios.post('/login/', this.form);
-					const currentUrl = window.location.href;
-					window.location.href = currentUrl + 'admi/';
-				} catch (error) {
-					this.errors.message = error.response?.data?.error || 'Ocurrió un error desconocido.';
-				}
+			login(){
+				window.location.href = 'http://localhost:8000/accounts/google/login/';
 			}
 		}
 	};
