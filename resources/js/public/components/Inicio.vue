@@ -6,9 +6,12 @@
 				<div class="login__img">
 					<img src="../../../../static/img/LogoUJEDvertical.png" alt="">
 				</div>
-				<div class="login__form">
-					<button @click="login">Google</button>
-				</div>
+				<button @click="login" class="btn btn--gray google-button" id="email" name="email" >
+					<div class="google-button__icon">
+						<img src="/static/img/google_icon.png" alt="Google">
+					</div>
+					<p class="google-button__text">Ingresa con Google</p>
+				</button>
 			</div>
 		</div>
 	</div>
