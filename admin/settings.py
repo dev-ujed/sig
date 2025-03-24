@@ -49,6 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'django_vite_plugin',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     #apps
 	'public',
     'administracion'
@@ -62,7 +67,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 ROOT_URLCONF = 'admin.urls'
 
@@ -94,7 +104,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'OPTIONS': {
-            'options': '-c search_path=sie'
+            'options': '-c search_path=admin'
         },
         'NAME': env.str('DB_NAME'),
         'USER': env.str('DB_USER'),
@@ -155,3 +165,26 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str('GOO_CLIENT_ID')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.str('GOO_SECRET_KEY')
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
+
+SITE_ID = 3
+
+LOGIN_REDIRECT_URL = '/admi/'
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIALACCOUNT_ADAPTER = 'public.adapters.CustomSocialAccountAdapter'
