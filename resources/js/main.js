@@ -1,6 +1,10 @@
 import { createApp, nextTick } from "vue"; // Usa createApp en lugar de Vue
 import Inicio from "./public/components/Inicio.vue";
 import Admin from "./admin/components/dashboard/Admin.vue";
+import Profesores from "./admin/components/Profesores.vue";
+import Navbar from "./admin/components/dashboard/Navbar.vue";
+import { SidebarMenu } from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import axios from 'axios'; 
 
 window.axios = axios;
@@ -142,4 +146,6 @@ createApp({
 })
 .component("inicio", Inicio)
 .component("admin", Admin)
+.component("profesores", Profesores)
+.component("navbar", Navbar)
 .mount("#dashboard");

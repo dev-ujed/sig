@@ -1,11 +1,11 @@
 <template>
     <div>
-        <section class="user-bar-admin">
-            <button id="user-bar-btn" class="user-bar-admin__btn" @click="$emit('toggle-sidebar')">
+        <section class="navbar-jiji">
+            <!-- <button id="user-bar-btn" class="user-bar-admin__btn" @click="$emit('toggle-sidebar')">
                 <img class="user-bar-admin__btn-icon" src="/static/img/Hamburger.png" alt="Menú Icon">
-                <span class="user-bar-admin__btn-text">S.I.M</span>
-                <span class="user-bar-admin__btn-text-large">Sistema de Indicadores y Monitoreo</span>
-            </button>
+                <span class="user-bar-admin__btn-text">S.I.G</span>
+                <span class="user-bar-admin__btn-text-large">Sistema de algo</span>
+            </button> -->
             <div class="user-bar-admin__profile">
                 <div class="user-bar-admin__avatar-container">
                     <img class="user-bar-admin__avatar" src="/static/img/icono-user.png" alt="Icono user">
@@ -24,7 +24,8 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> 
+            hihi
         </section>
     </div>
 </template>
@@ -50,3 +51,10 @@
         },
 	};
 </script>
+
+<style>
+.navbar-jiji{
+    background-color: #2a2a2e;
+    height: 60px;
+}
+</style>
