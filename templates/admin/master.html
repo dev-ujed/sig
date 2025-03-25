@@ -6,7 +6,8 @@
     <meta charset="UTF-8" />
 	  <meta name="csrf-token" content="{{ csrf_token }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SIE UJED</title>	
+    <title>SIG UJED</title>	
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	  {% vite %}
     {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
   </head>
@@ -19,8 +20,11 @@
       data-email="{{ request.user.email }}"
     >
     <div id="dashboard">
+      <admin>
         {% block content %}
+
         {% endblock %}
+      </admin>
     </div>
   </body>
 </html>
