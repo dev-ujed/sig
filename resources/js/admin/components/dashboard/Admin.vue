@@ -21,14 +21,32 @@
   
     data() {
       return {
-        isSidebarOpen: true, // Ahora está correctamente definido en data()
+        isSidebarOpen: true,
+        windowWidth: window.innerWidth,
+        windowHeight: window.innerHeight,
       };
     },
-  
+    
+    mounted() {
+      window.addEventListener('resize', this.handleResize);
+    },
+
+    beforeDestroy() {
+      window.removeEventListener('resize', this.handleResize);
+    },
+
     methods: {
       toggleSidebar() {
         this.isSidebarOpen = !this.isSidebarOpen;
       },
+
+      handleResize() {
+        this.windowWidth = window.innerWidth;
+        this.windowHeight = window.innerHeight;
+        if (window.innerWidth <= 768) {
+          this.isSidebarOpen = false;
+        }
+      }
     },
   };
   </script>
