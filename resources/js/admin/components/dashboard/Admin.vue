@@ -1,68 +1,55 @@
 <template>
-    <div class="admin-container">
-        <Navbar @toggle-sidebar="toggleSidebar" />
-        <div class="admin-main">
-            <sidebar-menu 
-                    :menu="menu"
-                    :relative="true"
-                >
-            </sidebar-menu>
-            <div class="admin-main__content">
-                <slot>
-
-                </slot>
-            </div>
-        </div>
+    <div class="layout">
+      <Navbar :isSidebarOpen="isSidebarOpen" @toggleSidebar="toggleSidebar" />
+      <div class="main-container">
+        <Sidebar :isOpen="isSidebarOpen" />
+        <main class="content">
+          <h1>Bienvenido</h1>
+          <p>Aquí va el contenido...</p>
+        </main>
+      </div>
     </div>
-</template>
-<script>
-    import Navbar from './Navbar.vue';
-    import Sidebar from './Sidebar.vue';
-    import { SidebarMenu } from 'vue-sidebar-menu'
-    import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+  </template>
+  
+  <script>
+  import Navbar from './Navbar.vue';
+  import Sidebar from './Sidebar.vue';
+  
+  export default {
+    name: 'Admin',
+    components: { Navbar, Sidebar },
+  
+    data() {
+      return {
+        isSidebarOpen: true, // Ahora está correctamente definido en data()
+      };
+    },
+  
+    methods: {
+      toggleSidebar() {
+        this.isSidebarOpen = !this.isSidebarOpen;
+      },
+    },
+  };
+  </script>
+  
 
-    export default {
-		name: 'admin',
+<style>
 
-        components: {
-            Navbar,
-            SidebarMenu
-        },
 
-        data() {
-            return {
-                showSidebar: false,
-                menu: [
-                    {
-                        header: 'S.I.G',
-                        hiddenOnCollapse: true
-                    },
-                    {
-                        href: '/',
-                        title: 'Unidades',
-                        icon: 'bi bi-shield-minus'
-                    },
-                    {
-                        title: 'Profesores',
-                        icon: 'bi bi-shield-plus',
-                        child: [
-                            {
-                                href: '/charts/sublink',
-                                title: 'Profesor'
-                            },
-                            {
-                                href: '/charts/sublink',
-                                title: 'Profesor'
-                            }
-                        ]
-                    }
-                ]
-            };
-        },
-        methods: {
-            toggleSidebar() {
-                this.showSidebar = !this.showSidebar;
-            }
-        }
-    }
-</script>
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+}
+.content {
+  flex: 1;
+  padding: 20px;
+  background: #f5f5f5;
+}
+</style>
