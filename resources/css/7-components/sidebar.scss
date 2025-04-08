@@ -5,7 +5,7 @@
     height: calc(100vh - 60px);
     display: flex;
     flex-direction: column;
-    transition: width 0.3s ease;
+    transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
   }
   
   .sidebar.collapsed {
@@ -55,7 +55,7 @@
   .icon {
     font-size: 24px;
     margin-right: 10px;
-    transition: color 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
   }
   
   .sidebar.collapsed .text:not(.floating-menu .text) {
@@ -154,7 +154,7 @@
       }
     }
   
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     .sidebar {
       width: 70px; 
       padding: 20px 10px; 
@@ -168,17 +168,74 @@
     .sidebar-item .text {
       display: flex;
     }
-  
-    .sidebar .icon {
-      font-size: 24px; 
-      margin-right: 0;
-    }
+
   
     .sidebar-submenu {
       background-color: #444;
       border-radius: 5px;
     }
+
+    .sidebar.collapsed .icon:not(.floating-menu .icon) {
+      margin-right: 0;
+    }
+  } */
+  
+  .sidebar-submenu, .floating-menu {
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
   }
   
+  .sidebar-submenu.enter-active, .floating-menu.enter-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
   
+  .sidebar-submenu.leave-active, .floating-menu.leave-active {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
   
+  .sidebar-submenu.enter, .floating-menu.enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  
+  .sidebar-submenu.leave-to, .floating-menu.leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  .sidebar-item, .floating-menu-item {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-item:hover, .floating-menu-item:hover {
+  transform: translateX(5px);
+}
+
+.fade-slide-enter-active, .fade-slide-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.fade-slide-enter, .fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.sidebar.collapsed .sidebar-item:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 70px;
+  background-color: #1a2542;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.sidebar.collapsed .sidebar-item.sub:hover::after {
+  content: none;
+}

@@ -11,7 +11,7 @@
     </div>
 
     <div
-      class="sidebar-item"
+      class="sidebar-item sub"
       ref="settingsButton"
       @click="toggleMenu('settings')"
     >
@@ -32,20 +32,23 @@
       </div>
     </div>
 
-    <div
-      v-if="isMenuOpen.settings && !isOpen"
-      class="floating-menu"
-      :style="{ top: floatingMenuPosition.top + 'px', left: floatingMenuPosition.left + 'px' }"
-    >
-      <div class="floating-menu-item">
-        <i class="mdi mdi-account icon"></i>
-        <span class="text">Subopción 1</span>
+    <transition name="fade-slide">
+      <div
+        v-if="isMenuOpen.settings && !isOpen"
+        class="floating-menu"
+        :style="{ top: floatingMenuPosition.top + 'px', left: floatingMenuPosition.left + 'px' }"
+      >
+      <div style="margin-bottom: 10px;">Configuración</div>
+        <div class="floating-menu-item">
+          <i class="mdi mdi-account icon"></i>
+          <span class="text">Subopción 1</span>
+        </div>
+        <div class="floating-menu-item">
+          <i class="mdi mdi-cog icon"></i>
+          <span class="text">Subopción 2</span>
+        </div>
       </div>
-      <div class="floating-menu-item">
-        <i class="mdi mdi-cog icon"></i>
-        <span class="text">Subopción 2</span>
-      </div>
-    </div>
+    </transition>
   </aside>
 </template>
 
