@@ -22,11 +22,9 @@
     data() {
       return {
         isSidebarOpen: true,
-        windowWidth: window.innerWidth,
-        windowHeight: window.innerHeight,
       };
     },
-    
+
     mounted() {
       window.addEventListener('resize', this.handleResize);
     },
@@ -41,10 +39,11 @@
       },
 
       handleResize() {
-        this.windowWidth = window.innerWidth;
-        this.windowHeight = window.innerHeight;
         if (window.innerWidth <= 768) {
           this.isSidebarOpen = false;
+        }
+        else{
+          this.isSidebarOpen = true;
         }
       }
     },
