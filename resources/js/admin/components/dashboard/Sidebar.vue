@@ -1,54 +1,62 @@
 <template>
   <aside :class="['sidebar', { 'collapsed': !isOpen }]">
-    <div class="sidebar-item" data-text="Inicio">
-      <i class="mdi mdi-home icon"></i>
-      <span class="text">Inicio</span>
-    </div>
-
-    <div class="sidebar-item" data-text="Perfil">
-      <i class="mdi mdi-account icon"></i>
-      <span class="text">Perfil</span>
-    </div>
-
-    <div
-      class="sidebar-item sub"
-      ref="settingsButton"
-      @click="toggleMenu('settings', 'Configuración')"
-    >
-      <i class="mdi mdi-cog icon"></i>
-      <span class="text">Configuración</span>
-      <i v-if="isMenuOpen.settings" class="mdi mdi-chevron-down icon"></i>
-      <i v-else class="mdi mdi-chevron-right icon"></i>
-    </div>
-
-    <div v-if="isMenuOpen.settings && isOpen" class="sidebar-submenu">
-      <div class="sidebar-item">
-        <i class="mdi mdi-account icon"></i>
-        <span class="text">Subopción 1</span>
-      </div>
-      <div class="sidebar-item">
-        <i class="mdi mdi-cog icon"></i>
-        <span class="text">Subopción 2</span>
-      </div>
-    </div>
-
-    <transition name="fade-slide">
-      <div
-        v-if="isMenuOpen.settings && !isOpen"
-        class="floating-menu"
-        :style="{ top: floatingMenuPosition.top + 'px', left: floatingMenuPosition.left + 'px' }"
+    <section v-for="(item, index) in menu" :key="item.id">
+      <div 
+        v-if="!item.children"
+        class="sidebar-item"
+        :data-text="item.text"
+        @click="goTo(item.link)"
       >
-      <div style="margin-bottom: 10px;">{{titleMenu}}</div>
-        <div class="floating-menu-item">
-          <i class="mdi mdi-account icon"></i>
-          <span class="text">Subopción 1</span>
-        </div>
-        <div class="floating-menu-item">
+        <i :class="`mdi ${item.icon} icon`"></i>
+        <span class="text">{{item.text}}</span>
+      </div>
+
+      <div v-else>
+        <div
+          class="sidebar-item sub"
+          :id="`${item.key}Button`"
+          @click="toggleMenu(item.key, item.text)"
+        >
           <i class="mdi mdi-cog icon"></i>
-          <span class="text">Subopción 2</span>
+          <span class="text">{{item.text}}</span>
+          <i v-if="isMenuOpen[item.key]" class="mdi mdi-chevron-down icon"></i>
+          <i v-else class="mdi mdi-chevron-right icon"></i>
+        </div>
+
+        <div 
+          v-for="(child, index) in item.children" :key="item.id" 
+          v-if="isMenuOpen[item.key] && isOpen" 
+          class="sidebar-submenu"
+        >
+          <div 
+            class="sidebar-item" 
+            @click="goTo(child.link)"
+          >
+            <i :class="`mdi ${child.icon} icon`"></i>
+            <span class="text">{{child.text}}</span>
+          </div>
         </div>
       </div>
-    </transition>
+
+      <transition name="fade-slide">
+        <div
+          v-if="isMenuOpen[item.key] && !isOpen"
+          class="floating-menu"
+          :style="{ top: floatingMenuPosition.top + 'px', left: floatingMenuPosition.left + 'px' }"
+        >
+        <div style="margin-bottom: 10px;">{{titleSubMenu}}</div>
+          <div 
+            v-for="(child, index) in item.children" :key="child.id" 
+            class="floating-menu-item"
+            @click="goTo(item.link)"
+          >
+            <i :class="`mdi ${child.icon} icon`"></i>
+            <span class="text">{{child.text}}</span>
+          </div>
+        </div>
+      </transition>
+
+    </section>
   </aside>
 </template>
 
@@ -62,32 +70,65 @@
     data() {
       return {
         isMenuOpen: {
-          settings: false,
         },
         floatingMenuPosition: {
           top: 0,
           left: 0,
         },
-        titleMenu : ''
+        titleSubMenu : '',
+        menu: [
+          { id: '1', text: 'Inicio', icon: 'mdi-home', link: 'inicio/' },
+          { id: '2', text: 'Perfil', icon: 'mdi-account', link: 'inicio/'},
+          {
+            id: '3', 
+            text: 'Configuración',
+            icon: 'mdi-cog',
+            key: 'settings',
+            children: [
+              { id: '1', text: 'Subopción 1', icon: 'mdi-account', link: 'inicio/'},
+              { id: '2', text: 'Subopción 2', icon: 'mdi-cog', link: 'inicio/'},
+            ],
+          },
+          {
+            id: '4', 
+            text: 'Labels',
+            icon: 'mdi-cog',
+            key: 'labels',
+            children: [
+              { id: '3', text: 'Subopción 1', icon: 'mdi-account', link: 'inicio/'},
+              { id: '4', text: 'Subopción 2', icon: 'mdi-cog', link: 'inicio/' },
+            ],
+          },
+        ],
       };
     },
     methods: {
       toggleMenu(menu, title) {
-        this.isMenuOpen[menu] = !this.isMenuOpen[menu];
-        this.titleMenu = title;
+        if (this.isMenuOpen[menu]) {
+          this.isMenuOpen[menu] = !this.isMenuOpen[menu];
+        }
+        else{
+          this.isMenuOpen = {};
+          this.isMenuOpen[menu] = !this.isMenuOpen[menu];
+        }
+        this.titleSubMenu = title;
 
         this.$nextTick(() => {
-        const button = this.$refs[`${menu}Button`];
+          const button = this.$el.querySelector(`#${menu}Button`);
           if (button) {
             const rect = button.getBoundingClientRect();
             const offsetTop = !this.isOpen && this.isMenuOpen[menu] ? rect.top : rect.top + 20;
-            const offsetLeft = !this.isOpen && this.isMenuOpen[menu] ? rect.right + 1  : rect.right + 5 - 185;
-            
+            const offsetLeft = !this.isOpen && this.isMenuOpen[menu] ? rect.right + 1 : rect.right + 5 - 185;
+
             this.floatingMenuPosition.top = offsetTop;
             this.floatingMenuPosition.left = offsetLeft;
           }
         });
       },
+      goTo(link){
+        console.log(this.$root.path+link);
+       /*  window.location.href = this.$root.path+link; */
+      }
     },
   };
 </script>

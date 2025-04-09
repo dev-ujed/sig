@@ -4,8 +4,7 @@
       <div class="main-container">
         <Sidebar :isOpen="isSidebarOpen" />
         <main class="content">
-          <h1>Bienvenido</h1>
-          <p>Aquí va el contenido...</p>
+ 
         </main>
       </div>
     </div>
@@ -52,8 +51,6 @@
   
 
 <style>
-
-
 .layout {
   display: flex;
   flex-direction: column;
