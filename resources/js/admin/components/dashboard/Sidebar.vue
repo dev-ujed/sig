@@ -66,6 +66,10 @@
     name: 'Sidebar',
     props: {
       isOpen: Boolean,
+      menu: {
+          type: Array,
+          required: true
+      },
     },
     data() {
       return {
@@ -76,17 +80,17 @@
           left: 0,
         },
         titleSubMenu : '',
-        menu: [
+        menu2: [
           { id: '1', text: 'Inicio', icon: 'mdi-home', link: 'inicio/' },
-          { id: '2', text: 'Perfil', icon: 'mdi-account', link: 'inicio/'},
+          { id: '2', text: 'Perfil', icon: 'mdi-account', link: 'perfil/'},
           {
             id: '3', 
             text: 'Configuración',
             icon: 'mdi-cog',
             key: 'settings',
             children: [
-              { id: '1', text: 'Subopción 1', icon: 'mdi-account', link: 'inicio/'},
-              { id: '2', text: 'Subopción 2', icon: 'mdi-cog', link: 'inicio/'},
+              { id: '1', text: 'Configuración 1', icon: 'mdi-account', link: 'settings1/'},
+              { id: '2', text: 'Configuración 2', icon: 'mdi-cog', link: 'settings2/'},
             ],
           },
           {
@@ -95,8 +99,8 @@
             icon: 'mdi-cog',
             key: 'labels',
             children: [
-              { id: '3', text: 'Subopción 1', icon: 'mdi-account', link: 'inicio/'},
-              { id: '4', text: 'Subopción 2', icon: 'mdi-cog', link: 'inicio/' },
+              { id: '3', text: 'Label 1', icon: 'mdi-account', link: 'label1/'},
+              { id: '4', text: 'Label 2', icon: 'mdi-cog', link: 'label2/' },
             ],
           },
         ],

@@ -44,22 +44,10 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
-        return self.create_user(matricula, email, password, **extra_fields)
-
-# Modelo personalizado de usuario
-class CustomUserManager(BaseUserManager):
-    def create_user(self, matricula, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError('El email debe ser proporcionado')
-        email = self.normalize_email(email)
-        user = self.model(matricula=matricula, email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, matricula, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
 
         return self.create_user(matricula, email, password, **extra_fields)
 
@@ -67,7 +55,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     id = models.BigAutoField(primary_key=True)
     username = models.CharField(max_length=50, null=True)
-    matricula = models.CharField(max_length=40, unique=True)
+    matricula = models.CharField(max_length=40)
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

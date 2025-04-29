@@ -2,7 +2,7 @@
     <div class="layout">
       <Navbar :isSidebarOpen="isSidebarOpen" @toggleSidebar="toggleSidebar" />
       <div class="main-container">
-        <Sidebar :isOpen="isSidebarOpen" />
+        <Sidebar :menu="menu" :isOpen="isSidebarOpen" />
         <main class="content">
  
         </main>
@@ -23,7 +23,12 @@
         isSidebarOpen: true,
       };
     },
-
+    props: {
+      menu: {
+          type: Array,
+          required: true
+      },
+    },
     mounted() {
       window.addEventListener('resize', this.handleResize);
     },
