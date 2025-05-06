@@ -2,10 +2,9 @@
     <div class="layout">
       <Navbar :isSidebarOpen="isSidebarOpen" @toggleSidebar="toggleSidebar" />
       <div class="main-container">
-        <Sidebar :isOpen="isSidebarOpen" />
+        <Sidebar :menu="menu" :isOpen="isSidebarOpen" />
         <main class="content">
-          <h1>Bienvenido</h1>
-          <p>Aquí va el contenido...</p>
+ 
         </main>
       </div>
     </div>
@@ -24,7 +23,12 @@
         isSidebarOpen: true,
       };
     },
-
+    props: {
+      menu: {
+          type: Array,
+          required: true
+      },
+    },
     mounted() {
       window.addEventListener('resize', this.handleResize);
     },
@@ -52,8 +56,6 @@
   
 
 <style>
-
-
 .layout {
   display: flex;
   flex-direction: column;

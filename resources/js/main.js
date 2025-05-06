@@ -20,7 +20,8 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 createApp({
     data() {
         return {
-            path: document.body.getAttribute("data-root"),
+            originPath: window.location.origin,
+            path: window.location.href,
             iconsMap: {},
             isLoading: true,
             isResizing: false,

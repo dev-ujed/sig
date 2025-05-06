@@ -1,5 +1,6 @@
 {% load vite %}
 {% load static %}
+{% load custom_filter_tags %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,9 +21,11 @@
       data-email="{{ request.user.email }}"
     >
     <div id="dashboard">
-      <admin>
+      <admin
+        :menu="{{request|get_menu}}"
+      >
         {% block content %}
-
+      
         {% endblock %}
       </admin>
     </div>

@@ -1,12 +1,11 @@
 .user-bar-admin {
     align-items: center;
-    background-color: $color-black;
+    background-color: #222;
     box-shadow: 0 3px 6px rgba(#000, 0.16);
     display: flex;
-    font-size: rem(13px);
+    font-size: 16px;
     height: 60px;
     justify-content: space-between;
-    position: relative;
 }
 
 .user-bar-admin__profile {
@@ -93,7 +92,7 @@
 }
 
 .user-bar-admin__profile-menu {
-    background-color: #37424d;
+    background-color: #3f3b3b;
     border-radius: 4px;
     box-shadow: 0 5px 5px rgba(#000, 0.2);
     font-size: 13px;
@@ -107,7 +106,7 @@
     @include position(absolute, 70px 10px null null);
 
     &::before{
-        @include triangle(top, #37424d, 8px);
+        @include triangle(top, #222, 8px);
         @include position(absolute, -7px 6px null null);
         z-index: 2;
     }
@@ -167,7 +166,7 @@
 }
 
 .user--info {
-    background: #2d363e;
+    background: #222;
     border-radius: 4px 4px 0 0;
     padding-top: 15px;
 }
@@ -175,7 +174,7 @@
 .user-bar-admin__profile-menu-link {
     border-bottom: 1px solid rgba(#fff, 0.1);
     border-radius: 3px;
-    color: $color-gray-50;
+    color: #ccc;
     display: block;
     font-size: rem(13);
     font-weight: 400;
@@ -187,20 +186,20 @@
     &:active,
     &:focus,
     &:hover {
-        background-color: lighten(#37424d, 3%);
+        background-color: #1a2542;
         color: #fff;
         text-decoration: none;
     }
 
     &--logout {
-        background-color: #2d363e;
+        background-color: #1a2542;
         font-size: rem(12);
         position: relative;
 
         &:active,
         &:focus,
         &:hover {
-            background-color: darken(#2d363e, 3%);
+            background-color: #1a2542;
 
             & > .user-bar__logout-icon {
                 color: #b55;
@@ -219,7 +218,7 @@
     background-color: transparent;
     border: 2px solid transparent;
     color: $color-gray-10;
-    font-size: rem(13);
+    font-size: 16px;
     margin: 0;
     padding: 1em 1.5em;
     transition: color 150ms ease-out;
@@ -243,7 +242,7 @@
 .user-bar-admin__logout-icon {
     line-height: 1;
     margin-right: 0.4em;
-    stroke: $color-gray-50;
+    stroke: #ccc;
     @include position(relative, 0.1em null null null); /* 1 */
     transition: stroke 150ms ease-out;
     vertical-align: top;
