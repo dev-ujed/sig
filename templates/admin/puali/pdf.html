@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Constancia UJED</title>
+  <style>
+    @page {
+    size: 8.5in 11in;
+    margin: 2cm;
+    }
+
+    body {
+      margin: 0;
+      font-family: arial;
+      font-weight: normal;
+    }
+
+    p {
+        font-weight: normal;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: -67px;
+    }
+
+    .header img {
+      height: 140px;
+      width: 200px;
+      object-fit: contain;
+    }
+
+     .presente { 
+        text-align: center; 
+        margin-bottom: 30px;
+        margin-top: 20px;
+    } 
+     .presente h3 {
+        font-weight: normal; 
+        font-size: 21px; 
+
+    } 
+
+    .name-photo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .foto {
+        width: 2.35cm; 
+        height: 3cm;
+        border: 1px solid #000;
+        padding-left: 10px;
+    }
+
+    .nombre {
+        text-align: center;
+        font-size: 30px; 
+        font-weight: bold;
+    }
+    
+    .texto-certificacion {
+        text-align: justify;
+        font-size: 16.5px; 
+        margin-left: 0;
+        margin-right: 0;
+        line-height: 1.4;
+    }
+
+    .texto-certificacion p {
+       text-indent: 40px;
+       line-height: 1;
+    }
+    .texto-certificacion span {
+        font-weight: bold;
+    }
+
+    .firmas {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6em;
+        margin-bottom: 3em;
+    }
+
+    .firma {
+        width: 47%;
+        text-align: center;
+        font-size: 12px;
+        line-height: 1;
+
+    }
+
+    .firma p {
+        font-size: 13px;
+    }
+    
+    
+
+    .linea-firma {
+        border-bottom: 1px solid #000;
+        margin-bottom: -10px;
+        height: 1.5px;
+    }
+
+    .fecha {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .fecha p {
+        font-size: 15px;
+    }
+
+    .qr-texto {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    }
+
+    .qr {
+    width: 12.5%; /* 1/8 de 100% */
+    padding-right: 10px;
+    }
+
+    .qr img {
+    width: 100%;
+    height: auto;
+    }
+
+    .texto {
+    width: 87.5%; /* 7/8 */
+    font-size: 13px;
+    line-height: 1;
+    text-align: justify;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        position: fixed;
+        bottom: -30px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="{% static 'img/logo-pdf.jpg' %}" alt="Logo Izquierda">
+        <img src="{% static 'img/logo-lenguas.jpg' %}" alt="Logo Derecha">
+    </div>
+
+    <div class="presente">
+    <h3>La Facultad de Lenguas de la <br>Universidad Júarez del Estado de Durango <br>otorga la presente</h3>
+    </div>
+
+    <h2 style="text-align: center; ">CONSTANCIA<h2>
+
+    <div class="name-photo">
+        <h2 style="text-align: center;" class="nombre">A: MANUEL ANTONIO SEDANO MONTOYA</h2>
+        <div class="foto"></div>
+    </div>
+
+    <div class="texto-certificacion">
+        <p>
+            Por haber acreditado el examen de inglés <span>"CERTIFICACIÓN DE EGRESO"</span><br>
+            correspondiente al nivel B1 del MCER (Marco Europeo de Referencia para las Lenguas)<br>
+            con una calificación de 10.0 (diez punto cero), en el mes de diciembre del 2015.
+        </p>
+    </div>
+
+    <div class="firmas">
+        <div class="firma">
+            <div class="linea-firma"></div>
+            <p class="nombre">M.E JUAN ANTONIO DE LA TORRE MORALES</p>
+            <p style="font-size: 11px; ">DIRECTOR</p>
+        </div>
+
+        <div class="firma">
+            <div class="linea-firma"></div>
+            <p class="nombre">M.A E.L.T MAYRA SELENE NÁJERA RIVAS</p>
+            <p style="font-size: 11px; ">SECRETARIA ACADÉMICA</p>
+        </div>
+    </div>
+
+    <div class="fecha">
+        <p>Victoria de Durango, Dgo. <br>
+            Se extiende la presente a los 12 dias del mes de mayo de 2025.
+        <p>
+    </div>
+
+    <div class="qr-texto">
+        <div class="qr">
+            <img src="{% static 'qr.png' %}" alt="QR" />
+        </div>
+        <div class="texto">
+            <p>
+            EL USUARIO INDEPENDIENTE B1: <br>
+            Es capaz de comprender los puntos principales de textos claro en lengua estándar si tratan sobre cuestiones que le son conocidas, ya sea en situaciones de trabajo, de estudio o de ocio. Sabe desenvolverse en la mayor parte de las situaciones que pueden surgir durante un viaje por zonas donde se utiliza la lengua. Es capaz de producir textos sencillos y coherentes sobre temas que le son familiares o en los que tiene un interés personal. Puede describir experiencias, acontecimientos, deseos y aspiraciones, así como justificar brevemente sus opiniones o explicar sus planes
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="cadena">Cadena digital: a23fcb5e9d2f08a3d...</div>
+        <div class="folio">Folio: 00123</div>
+    </div>
+</body>
+</html>

@@ -17,7 +17,7 @@
           :id="`${item.key}Button`"
           @click="toggleMenu(item.key, item.text)"
         >
-          <i class="mdi mdi-cog icon"></i>
+          <i :class="`mdi ${item.icon} icon`"></i>
           <span class="text">{{item.text}}</span>
           <i v-if="isMenuOpen[item.key]" class="mdi mdi-chevron-down icon"></i>
           <i v-else class="mdi mdi-chevron-right icon"></i>

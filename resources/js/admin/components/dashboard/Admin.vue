@@ -4,7 +4,7 @@
       <div class="main-container">
         <Sidebar :menu="menu" :isOpen="isSidebarOpen" />
         <main class="content">
- 
+          <slot></slot>
         </main>
       </div>
     </div>
@@ -56,19 +56,5 @@
   
 
 <style>
-.layout {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
 
-.main-container {
-  display: flex;
-  flex: 1;
-}
-.content {
-  flex: 1;
-  padding: 20px;
-  background: #f5f5f5;
-}
 </style>

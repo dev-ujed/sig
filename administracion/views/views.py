@@ -3,17 +3,23 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from ..models import MenuItem
 from ..serializers import MenuItemSerializer
-import json
-
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from weasyprint import HTML
 # Create your views here.
 
 def home(request):
 	if request.method == 'GET':
 		if request.user.is_authenticated:
-			menu_items = MenuItem.objects.filter(parent__isnull=True)
-			serializer = MenuItemSerializer(menu_items, many=True)
-			print(json.dumps(serializer.data))
-		return render(request, 'admin/home.html', {'menu': json.dumps(serializer.data)})
+			print('holi')
+		return render(request, 'admin/home.html')
+
+def pdfPuali(request):
+    html_string = render_to_string('admin/puali/pdf.html', {'datos': 'valor'})
+    pdf = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf()
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="documento.pdf"'
+    return response
 
 def run():
     inicio = MenuItem.objects.create(id=1, text='Inicio', icon='mdi-home', link='inicio/')
