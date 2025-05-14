@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from ..models import MenuItem
-from ..serializers import MenuItemSerializer
+from ..models import *
+from ..serializers import *
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from weasyprint import HTML
+import qrcode
+from io import BytesIO
+import base64
+import json
 # Create your views here.
 
 def home(request):
@@ -14,8 +18,20 @@ def home(request):
 			print('holi')
 		return render(request, 'admin/home.html')
 
-def pdfPuali(request):
-    html_string = render_to_string('admin/puali/pdf.html', {'datos': 'valor'})
+def pdfPuali(request, folio):
+    serializer = constPualiSerializer(PUAALI_DATOS_CONSTANCIAS.objects.get(folio = folio)).data
+    qr_data = 'https://facultaddelenguas.ujed.mx/puaali/validar-certificado/' + folio
+    qr = qrcode.make(qr_data)
+    buffer = BytesIO()
+    qr.save(buffer, format='PNG')
+    qr_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    qr_uri = f'data:image/png;base64,{qr_base64}'
+
+    html_string = render_to_string('admin/puali/pdf.html', {
+        'data': serializer,
+        'qr_image': qr_uri
+    })
+
     pdf = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf()
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="documento.pdf"'

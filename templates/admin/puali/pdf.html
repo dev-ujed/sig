@@ -122,7 +122,7 @@
     }
 
     .qr {
-    width: 12.5%; /* 1/8 de 100% */
+    width: 15%; /* 1/8 de 100% */
     padding-right: 10px;
     }
 
@@ -169,9 +169,9 @@
 
     <div class="texto-certificacion">
         <p>
-            Por haber acreditado el examen de inglés <span>"CERTIFICACIÓN DE EGRESO"</span><br>
-            correspondiente al nivel B1 del MCER (Marco Europeo de Referencia para las Lenguas)<br>
-            con una calificación de 10.0 (diez punto cero), en el mes de diciembre del 2015.
+            Por haber acreditado el examen de inglés <span>"{{data.tipo_constancia}}"</span><br>
+            correspondiente al nivel {{data.nivel}} del {{data.marco}}
+            con una calificación de {{data.calificacion_letra}}, {{data.fecha_texto}}.
         </p>
     </div>
 
@@ -191,25 +191,24 @@
 
     <div class="fecha">
         <p>Victoria de Durango, Dgo. <br>
-            Se extiende la presente a los 12 dias del mes de mayo de 2025.
+            {{data.fecha_hoy}}
         <p>
     </div>
 
     <div class="qr-texto">
         <div class="qr">
-            <img src="{% static 'qr.png' %}" alt="QR" />
+            <img src="{{ qr_image }}" alt="Código QR" >
         </div>
         <div class="texto">
             <p>
-            EL USUARIO INDEPENDIENTE B1: <br>
-            Es capaz de comprender los puntos principales de textos claro en lengua estándar si tratan sobre cuestiones que le son conocidas, ya sea en situaciones de trabajo, de estudio o de ocio. Sabe desenvolverse en la mayor parte de las situaciones que pueden surgir durante un viaje por zonas donde se utiliza la lengua. Es capaz de producir textos sencillos y coherentes sobre temas que le son familiares o en los que tiene un interés personal. Puede describir experiencias, acontecimientos, deseos y aspiraciones, así como justificar brevemente sus opiniones o explicar sus planes
+                {{data.nivel_explicacion|safe}}
             </p>
         </div>
     </div>
 
     <div class="footer">
-        <div class="cadena">Cadena digital: a23fcb5e9d2f08a3d...</div>
-        <div class="folio">Folio: 00123</div>
+        <div class="cadena">{{data.hash}}</div>
+        <div class="folio">FOLIO: {{data.folio}}</div>
     </div>
 </body>
 </html>
