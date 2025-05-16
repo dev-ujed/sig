@@ -7,6 +7,9 @@ import { SidebarMenu } from 'vue-sidebar-menu'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import axios from 'axios'; 
 
+import AlumnosCertificados from "./admin/components/certificados/AlumnosCertificados.vue";
+import Certificadoform from './admin/components/certificados/CertificadoForm.vue';
+
 window.axios = axios;
 
 function getCSRFToken() {
@@ -149,4 +152,6 @@ createApp({
 .component("admin", Admin)
 .component("profesores", Profesores)
 .component("navbar", Navbar)
+.component('certificadoform', Certificadoform)
+.component('alumnoscertificados', AlumnosCertificados)
 .mount("#dashboard");
