@@ -130,8 +130,7 @@
         });
       },
       goTo(link){
-        console.log(this.$root.path+link);
-       /*  window.location.href = this.$root.path+link; */
+        window.location.href = this.$root.path+link;
       }
     },
   };
