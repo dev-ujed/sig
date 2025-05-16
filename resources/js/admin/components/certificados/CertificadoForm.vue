@@ -100,7 +100,7 @@
 
         methods:{
             getConstancia(folio) {
-                axios.get(`http://127.0.0.1:8000/admi/get_constancia/${folio}/`)
+                axios.get(`${this.$root.originPath}/admi/get_constancia/${folio}/`)
                     .then(response => {
                         const data = response.data;
 
@@ -133,7 +133,7 @@
                     fecha: this.fechaActual,
                 };
 
-                axios.put(`http://127.0.0.1:8000/admi/update_constancia/${folio}/`, datos, {
+                axios.put(`${this.$root.originPath}/admi/update_constancia/${folio}/`, datos, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -158,7 +158,7 @@
                     fecha: this.fechaActual,
                 };
 
-                axios.post('http://127.0.0.1:8000/admi/generar_certificado/', datos, {
+                axios.post(this.$root.originPath +'/admi/generar_certificado/', datos, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -166,7 +166,7 @@
                     .then(response => {
                         alert("Certificado generado exitosamente.");
                         this.limpiarFormulario();
-                        console.log(response.data);
+                        window.open(this.$root.originPath + '/admi/const_puali/pdf/'+ response.data.folio, '_blank');
                     })
                     .catch(error => {
                         alert("Error al generar certificado.");
@@ -175,7 +175,7 @@
             },
 
             getTiposConstancias(){
-                axios.get('http://127.0.0.1:8000/admi/tipos_constancias/')
+                axios.get(`${this.$root.originPath}/admi/tipos_constancias/`)
                     .then(response => {
                         this.tipos_constancias = response.data;
                     })
@@ -194,7 +194,7 @@
             },
 
             getEscuelas(){
-                axios.get('http://127.0.0.1:8000/admi/escuelas/')
+                axios.get(`${this.$root.originPath}/admi/escuelas/`)
                     .then(response => {
                         this.escuelas = response.data;
                     })

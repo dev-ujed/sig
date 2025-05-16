@@ -27,6 +27,10 @@
                             <p>{{ constancia.fecha }}</p>
                             <button class="btn btn--blue" @click="editarConstancia(constancia.folio)">Editar</button>
                             <button class="btn btn--danger" @click="openModal(constancia.folio)">Eliminar</button>
+                            <button class="btn btn--pdf" @click="downloadPdf(constancia.folio)">
+                                Descargar
+                                <i class="mdi mdi-file-pdf-box"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -53,6 +57,12 @@
                             <td>{{ constancia.fecha }}</td>
                             <td><button class="btn btn--blue" @click="editarConstancia(constancia.folio)">Editar</button></td>
                             <td><button class="btn btn--danger" @click="openModal(constancia.folio)">Eliminar</button></td>
+                            <td>
+                                <button class="btn btn--pdf" @click="downloadPdf(constancia.folio)">
+                                Descargar
+                                <i class="mdi mdi-file-pdf-box"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -135,7 +145,7 @@
             closeModal() {
                 this.isModalVisible = false;
             },
-
+            
             calculateVisiblePages() {
                 const range = 2;
                 const start = Math.max(1, this.currentPage - range);
@@ -159,7 +169,7 @@
             },
 
             buscarConstancia() {
-                axios.get(`http://127.0.0.1:8000/admi/datos_constancias/?buscar=${encodeURIComponent(this.buscar)}&page=${this.currentPage}&page_size=10`)
+                axios.get(`${this.$root.originPath}/admi/datos_constancias/?buscar=${encodeURIComponent(this.buscar)}&page=${this.currentPage}&page_size=10`)
                     .then(response => {
                     this.constancias = response.data;
                     this.totalPages = response.data.total_pages;
@@ -172,7 +182,7 @@
 
 
             get_constancias_datos(){
-                axios.get(`http://127.0.0.1:8000/admi/datos_constancias/?page=${this.currentPage}&page_size=10`)
+                axios.get(`${this.$root.originPath}/admi/datos_constancias/?page=${this.currentPage}&page_size=10`)
                     .then(response => {
                         this.constancias = response.data;
                         this.totalPages = response.data.total_pages;
@@ -183,7 +193,7 @@
             },
 
             eliminarConstancia(folio) {
-                axios.delete(`http://127.0.0.1:8000/admi/delete_constancia/${parseInt(folio)}/`)
+                axios.delete(`${this.$root.originPath}/admi/delete_constancia/${parseInt(folio)}/`)
                     .then(response => {
                         this.isModalVisible = false,
                         this.get_constancias_datos();
@@ -192,6 +202,10 @@
                         console.error("Error al eliminar:", error);
                         alert("Ocurrió un error al intentar eliminar la constancia.");
                 });
+            },
+
+            downloadPdf(folio) {
+                window.open(this.$root.originPath + '/admi/const_puali/pdf/'+ folio, '_blank');
             },
         }
     }
@@ -228,4 +242,5 @@
     .modal-actions button:hover {
     opacity: 0.8;
     }
+
 </style>
