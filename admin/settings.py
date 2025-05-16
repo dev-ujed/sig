@@ -54,12 +54,15 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'corsheaders',
+    'rest_framework',
     #apps
 	'public',
     'administracion'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -189,3 +192,7 @@ LOGIN_REDIRECT_URL = '/admi/'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_ADAPTER = 'public.adapters.CustomSocialAccountAdapter'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+]

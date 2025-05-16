@@ -4,7 +4,9 @@
       <div class="main-container">
         <Sidebar :menu="menu" :isOpen="isSidebarOpen" />
         <main class="content">
-          <slot></slot>
+          <slot>
+            
+          </slot>
         </main>
       </div>
     </div>
