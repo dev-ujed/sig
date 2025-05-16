@@ -4,14 +4,14 @@ from administracion.views.views import generarConstancia, eliminarConstancia
 
 urlpatterns = [
 	path('', views.home, name='home' ),
-  path('certificado/', views.certificadosIndex, name='certificado'),
-  path('certificado/form/', views.certificadosForm, name='certificadosForm'),
-  path('escuelas/', views.getEscuelas, name='get_escuelas'),
-  path('datos_constancias/', views.getPuaali_datos_contancias, name='get_datos_constancias'),
-  path('tipos_constancias/', views.getTiposConstancias, name='getTiposConstancias'),
-  path('generar_certificado/', generarConstancia.as_view(), name='generar_certificado'),
-  path('get_constancia/<int:folio>/', generarConstancia.as_view(), name='get_constancia'),
-  path('update_constancia/<int:folio>/', generarConstancia.as_view(), name='get_constancia'),
+	path('certificado/', views.certificadosIndex, name='certificado'),
+	path('certificado/form/', views.certificadosForm, name='certificadosForm'),
+	path('escuelas/', views.getEscuelas, name='get_escuelas'),
+	path('datos_constancias/', views.getPuaali_datos_contancias, name='get_datos_constancias'),
+	path('tipos_constancias/', views.getTiposConstancias, name='getTiposConstancias'),
+	path('generar_certificado/', generarConstancia.as_view(), name='generar_certificado'),
+	path('get_constancia/<int:folio>/', generarConstancia.as_view(), name='get_constancia'),
+	path('update_constancia/<int:folio>/', generarConstancia.as_view(), name='get_constancia'),
 	path('delete_constancia/<int:folio>/', eliminarConstancia.as_view(), name='eliminar_constancia'),
-	path('puali/pdf/<str:folio>/', views.pdfPuali, name='pdf-puali' ),
+	path('const_puali/pdf/<str:folio>/', views.pdfCertiPuali, name='pdf-puali' ),
 ]
