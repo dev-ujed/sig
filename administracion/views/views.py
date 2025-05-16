@@ -1,29 +1,49 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from ..models import *
+from ..serializers import *
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import qrcode
+from io import BytesIO
+import base64
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 from django.db.models import Case, When, IntegerField, F, Q
-from django.shortcuts import get_object_or_404
 from rest_framework import status
 from datetime import datetime
 from django.db.models import Max
 from django.db.models.functions import Coalesce
 import hashlib
 import random
-from ..models import *
-from ..serializers import MenuItemSerializer
 import json
-
 # Create your views here.
 
 def home(request):
 	if request.method == 'GET':
 		if request.user.is_authenticated:
-			menu_items = MenuItem.objects.filter(parent__isnull=True)
-			serializer = MenuItemSerializer(menu_items, many=True)
-			print(json.dumps(serializer.data))
-		return render(request, 'admin/home.html', {'menu': json.dumps(serializer.data)})
+			print('holi')
+		return render(request, 'admin/home.html')
+
+def pdfPuali(request, folio):
+    serializer = constPualiSerializer(PUAALI_DATOS_CONSTANCIAS.objects.get(folio = folio)).data
+    qr_data = 'https://facultaddelenguas.ujed.mx/puaali/validar-certificado/' + folio
+    qr = qrcode.make(qr_data)
+    buffer = BytesIO()
+    qr.save(buffer, format='PNG')
+    qr_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    qr_uri = f'data:image/png;base64,{qr_base64}'
+
+    html_string = render_to_string('admin/puali/pdf.html', {
+        'data': serializer,
+        'qr_image': qr_uri
+    })
+
+    pdf = HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf()
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="documento.pdf"'
+    return response
 	
 def certificadosIndex(request):
     if request.method == 'GET':

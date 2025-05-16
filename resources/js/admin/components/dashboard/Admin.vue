@@ -58,18 +58,5 @@
   
 
 <style>
-.layout {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
 
-.main-container {
-  display: flex;
-  flex: 1;
-}
-.content {
-  flex: 1;
-  background: #f5f5f5;
-}
 </style>
