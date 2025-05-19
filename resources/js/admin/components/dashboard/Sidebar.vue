@@ -130,7 +130,7 @@
         });
       },
       goTo(link){
-        window.location.href = this.$root.path+link;
+        window.location.href = this.$root.originPath+'/admi/'+link;
       }
     },
   };
