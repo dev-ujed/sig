@@ -6,13 +6,13 @@
   <title>Constancia UJED</title>
   <style>
     @page {
-    size: 8.5in 11in;
-    margin: 2cm;
+        size: 8.5in 11in;
+        margin: 2cm 2cm 1cm 2cm;
     }
 
     body {
       margin: 0;
-      font-family: arial;
+      font-family: Arial, sans-serif;
       font-weight: normal;
     }
 
@@ -37,6 +37,7 @@
         text-align: center; 
         margin-bottom: 30px;
         margin-top: 20px;
+        font-family: Arial
     } 
      .presente h3 {
         font-weight: normal; 
@@ -54,10 +55,22 @@
         width: 2.35cm; 
         height: 3cm;
         border: 1px solid #000;
-        padding-left: 10px;
+        margin-left: 10px;
     }
 
     .nombre {
+        text-align: center;
+        font-size: 30px; 
+        font-weight: bold;
+        flex: 7; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        margin: 0; 
+        text-align: center;"
+    }
+
+    .nombre_firma {
         text-align: center;
         font-size: 30px; 
         font-weight: bold;
@@ -69,6 +82,7 @@
         margin-left: 0;
         margin-right: 0;
         line-height: 1.4;
+        margin-top: 20px;
     }
 
     .texto-certificacion p {
@@ -98,8 +112,6 @@
         font-size: 13px;
     }
     
-    
-
     .linea-firma {
         border-bottom: 1px solid #000;
         margin-bottom: -10px;
@@ -107,7 +119,7 @@
     }
 
     .fecha {
-        margin-top: 50px;
+        margin-top: 110px;
         text-align: center;
     }
 
@@ -116,26 +128,26 @@
     }
 
     .qr-texto {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
     }
 
     .qr {
-    width: 15%; /* 1/8 de 100% */
-    padding-right: 10px;
+        width: 15%;
+        padding-right: 10px;
     }
 
     .qr img {
-    width: 100%;
-    height: auto;
+        width: 100%;
+        height: auto;
     }
 
     .texto {
-    width: 87.5%; /* 7/8 */
-    font-size: 13px;
-    line-height: 1;
-    text-align: justify;
+        width: 87.5%;
+        font-size: 13px;
+        line-height: 1;
+        text-align: justify;
     }
 
     .footer {
@@ -143,7 +155,7 @@
         justify-content: space-between;
         font-size: 12px;
         position: fixed;
-        bottom: -30px;
+        bottom: 0;
         width: 100%;
         box-sizing: border-box;
     }
@@ -163,9 +175,12 @@
     <h2 style="text-align: center; ">CONSTANCIA<h2>
 
     <div class="name-photo">
-        <h2 style="text-align: center;" class="nombre">A: MANUEL ANTONIO SEDANO MONTOYA</h2>
+        <h2 class="nombre">
+            A: {{ data.nombre_alumno.upper }}
+        </h2>
         <div class="foto"></div>
     </div>
+
 
     <div class="texto-certificacion">
         <p>
@@ -178,20 +193,21 @@
     <div class="firmas">
         <div class="firma">
             <div class="linea-firma"></div>
-            <p class="nombre">M.E JUAN ANTONIO DE LA TORRE MORALES</p>
+            <p class="nombre_firma">M.E JUAN ANTONIO DE LA TORRE MORALES</p>
             <p style="font-size: 11px; ">DIRECTOR</p>
         </div>
 
         <div class="firma">
             <div class="linea-firma"></div>
-            <p class="nombre">M.A E.L.T MAYRA SELENE NÁJERA RIVAS</p>
+            <p class="nombre_firma">M.A E.L.T MAYRA SELENE NÁJERA RIVAS</p>
             <p style="font-size: 11px; ">SECRETARIA ACADÉMICA</p>
         </div>
     </div>
-
+    
     <div class="fecha">
         <p>Victoria de Durango, Dgo. <br>
-            {{data.fecha_hoy}}
+            {{data.fecha_hoy}} <br>
+            Este documento tiene una vigencia de dos años después de la fecha de expedición.
         <p>
     </div>
 
