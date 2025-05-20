@@ -71,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'administracion.middleware.RequireLoginMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -195,4 +196,10 @@ SOCIALACCOUNT_ADAPTER = 'public.adapters.CustomSocialAccountAdapter'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
+]
+
+LOGIN_EXEMPT_URLS = [
+    '/',                   
+    '/login/',             
+    '/custom_logout/',           
 ]

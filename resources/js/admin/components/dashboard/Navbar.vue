@@ -19,7 +19,7 @@
                         </div>
                     </li>
                     <li class="user-bar-admin__profile-menu-item">
-                        <a :href="logout" class="user-bar-admin__profile-menu-link">
+                        <a :href="logoutUrl" class="user-bar-admin__profile-menu-link">
                             Cerrar sesión
                         </a>
                     </li>
@@ -32,8 +32,16 @@
 <script>
     export default {
         name: 'Navbar',
+        data() {
+            return {
+                logoutUrl: '',
+            };
+        },
         props: {
             isSidebarOpen: Boolean,
+        },
+        mounted() {
+                this.logoutUrl = this.$root.originPath+ '/logout/';
         },
     };
 </script>
