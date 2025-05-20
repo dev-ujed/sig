@@ -145,7 +145,7 @@
 
     .texto {
         width: 87.5%;
-        font-size: 13px;
+        font-size: 9pt;
         line-height: 1;
         text-align: justify;
     }
@@ -169,14 +169,14 @@
     </div>
 
     <div class="presente">
-    <h3>La Facultad de Lenguas de la <br>Universidad Júarez del Estado de Durango <br>otorga la presente</h3>
+    <h3>La Facultad de Lenguas de la <br>Universidad Juárez del Estado de Durango <br>otorga la presente</h3>
     </div>
 
     <h2 style="text-align: center; ">CONSTANCIA<h2>
 
     <div class="name-photo">
         <h2 class="nombre">
-            A: {{ data.nombre_alumno.upper }}
+            A: {{ data.nombre_alumno|title }}
         </h2>
         <div class="foto"></div>
     </div>
@@ -193,13 +193,13 @@
     <div class="firmas">
         <div class="firma">
             <div class="linea-firma"></div>
-            <p class="nombre_firma">M.E JUAN ANTONIO DE LA TORRE MORALES</p>
+            <p class="nombre_firma">M.E. JUAN ANTONIO DE LA TORRE MORALES</p>
             <p style="font-size: 11px; ">DIRECTOR</p>
         </div>
 
         <div class="firma">
             <div class="linea-firma"></div>
-            <p class="nombre_firma">M.A E.L.T MAYRA SELENE NÁJERA RIVAS</p>
+            <p class="nombre_firma">M.A. E.L.T. MAYRA SELENNE NÁJERA RIVAS</p>
             <p style="font-size: 11px; ">SECRETARIA ACADÉMICA</p>
         </div>
     </div>
@@ -207,7 +207,6 @@
     <div class="fecha">
         <p>Victoria de Durango, Dgo. <br>
             {{data.fecha_hoy}} <br>
-            Este documento tiene una vigencia de dos años después de la fecha de expedición.
         <p>
     </div>
 
@@ -217,6 +216,7 @@
         </div>
         <div class="texto">
             <p>
+                Este documento tiene una vigencia de dos años después de la fecha de expedición.<br>
                 {{data.nivel_explicacion|safe}}
             </p>
         </div>
