@@ -13,17 +13,30 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return self.text
-    
-class MenuPermission(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='menu_permissions')
-    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE, related_name='user_permissions')
 
-    class Meta:
-        unique_together = ('user', 'menu_item')
+class Rol(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(null=True)
+
+    def __str__(self):
+        return self.name
+    
+class MenuRol(models.Model):
+    rol = models.ForeignKey(Rol, on_delete=models.CASCADE, null=True)
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"{self.user.email} -> {self.menu_item.text}"
 
+class MenuPermission(models.Model):
+    email = models.CharField(max_length=120, null=True)
+    rol = models.ForeignKey(Rol, on_delete=models.CASCADE, null=True)
+    class Meta:
+        unique_together = ('email', 'rol')
+
+    def __str__(self):
+        return f"{self.email} -> {self.rol.name}"
+    
 class Oescuelas(models.Model):
     cve_escuela = models.CharField(primary_key=True, max_length=10)
     desc_escuela = models.CharField(max_length=120)
