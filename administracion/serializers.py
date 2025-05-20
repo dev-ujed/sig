@@ -56,4 +56,4 @@ class constPualiSerializer(serializers.ModelSerializer):
     
     def get_fecha_texto(self, obj):
         fecha = obj.fecha 
-        return fecha.strftime("en el mes de %B del %Y")
+        return fecha.strftime("en el mes de %B de %Y")
