@@ -48,7 +48,7 @@
           <div 
             v-for="(child, index) in item.children" :key="child.id" 
             class="floating-menu-item"
-            @click="goTo(item.link)"
+            @click="goTo(child.link)"
           >
             <i :class="`mdi ${child.icon} icon`"></i>
             <span class="text">{{child.text}}</span>
