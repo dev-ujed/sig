@@ -2,18 +2,22 @@
     <div class="db-heading--admin">
         <h1 class="db-heading--admin__title">Lista de certificados</h1>
     </div>
-    <div class="button-container mt-8 mr-8">
-        <button class="btn btn--success btn-generar" @click="goToForm">Nuevo</button>
-    </div>
-    <div class="section container">
-        <div class="container container--admin section--admin mb-16">
+
+    <div class="contenedor__header container">
+        <div class="header__input">
             <form action="" class="db-search-form" @submit.prevent="buscarConstancia">
                 <div class="search-wrapper">
-                    <input id="search-input"  name="buscar" type="search" placeholder="Buscar por nombre" class="form-field search-input" v-model="buscar">
+                    <input id="search-input"  name="buscar" type="search" placeholder="Buscar por nombre" class="form-field" v-model="buscar">
                     <img class="search-icon" src="/static/img/Icon search.png" alt="Icon filtro">
                 </div>
             </form>
         </div>
+        <div class="header__button">
+            <button class="btn btn--success btn-generar" @click="goToForm">Nuevo</button>
+        </div>
+    </div>
+    
+    <div class="container">
         <div class="db-panel">
             <div class="list-container">
                 <div class="record" v-for="(constancia, index) in constancias.constancias" :key="index">
@@ -104,7 +108,7 @@
 
     export default{
         name: 'alumnoscertificados',
-
+        
         data(){
             return{
                 constancias: [],
