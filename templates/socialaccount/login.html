@@ -1,0 +1,150 @@
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Acceso a Mi Portal</title>
+  <link rel="icon" href="{% static 'img/favicon.ico' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* CSS Puro embebido */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .nav {
+      background-color: #ffffff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .nav-ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .section--lg {
+      padding: 60px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .box.b-1 {
+      border: 1px solid #e0e0e0;
+    }
+
+    .h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .btn--info {
+      background-color: #d20000;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn--info:hover {
+      background-color: #d2000080;
+    }
+
+    .float-right {
+      float: right;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+
+    .login-form {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        margin: 0 20px;
+        padding: 20px;
+      }
+
+      .nav-ul img {
+        width: 140px;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+        <section class="user-bar-admin">
+            
+        </section>
+    </div>
+
+  <section class="section section--lg">
+    <div class="container box b-1">
+        <h1 class="h2 form-title text-center">Acceso a Sistema Integral de Gestión</h1>
+        <div class="mx-auto">
+          {% if process == "connect" %}
+            <h1>{% blocktrans with provider.name as provider %}Conectado! {{ provider }}{% endblocktrans %}</h1>
+            <p>{% blocktrans with provider.name as provider %}Estás a punto de conectar una nueva cuenta desde {{ provider }}.{% endblocktrans %}</p>
+          {% else %}
+            <h1>{% blocktrans with provider.name as provider %}Iniciar sesión via {{ provider }}{% endblocktrans %}</h1>
+            <p>{% blocktrans with provider.name as provider %}Estás a punto de iniciar sesión usando una cuenta de {{ provider }}.{% endblocktrans %}</p>
+          {% endif %}
+        </div>
+        <hr>
+        <div class="login-form">
+          <form method="post">
+            {% csrf_token %}
+            <div class="text-center">
+              <button class="btn btn--info float-right" type="submit">{% trans "Continuar" %}</button>
+              <br><br>
+            </div>
+          </form>
+        </div>
+    </div>
+  </section>
+
+</body>
+</html>
+{% endblock %}
