@@ -32,7 +32,12 @@ def certificadosIndex(request):
         
 def certificadosForm(request):
     if request.method == 'GET':
-        return render(request, 'admin/certificados/formCertificados.html')
+        if request.GET.get('folio'):
+            formTitle = 'Editar certificado'
+        else:
+            formTitle = 'Generar certificado'
+            
+        return render(request, 'admin/certificados/formCertificados.html', {'title': formTitle})
 
 def getEscuelas(request):
 	if request.method == 'GET':

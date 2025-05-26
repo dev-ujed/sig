@@ -1,6 +1,6 @@
 <template>
     <div class="db-heading--admin">
-        <h1 class="db-heading--admin__title">Generar certificado</h1>
+        <h1 class="db-heading--admin__title">{{title}}</h1>
     </div>
     <section class="section container">
         <div class="db-panel">
@@ -57,7 +57,7 @@
 
                     <div class="button-container">
                         <button class="btn btn--success" v-if="!esEdicion">Generar</button>
-                        <button class="btn btn--blue" v-else @click.prevent="editarCertificado">Editar</button>
+                        <button class="btn btn--blue" v-else @click.prevent="editarCertificado">Guardar</button>
                     </div>
                 </div>
             </form>
@@ -68,9 +68,13 @@
     import axios from 'axios';
     
     export default {
-        
 		name: 'certificadoform',
-
+        props: {
+            title: {
+                type: String,
+                required: true
+            }
+        },
         data(){
             return{
                 fechaActual: '',
@@ -139,8 +143,8 @@
                     }
                 })
                     .then(response => {
-                        alert("Constancia editada exitosamente.");
-                        console.log(response.data);
+                        window.open(this.$root.originPath + '/admi/const_puali/pdf/'+ folio, '_blank');
+                        window.location.href = `${this.$root.originPath}/admi/certificado/`;
                     })
                     .catch(error => {
                         alert("Error al editar constancia.");
@@ -164,9 +168,9 @@
                     }
                 })
                     .then(response => {
-                        alert("Certificado generado exitosamente.");
                         this.limpiarFormulario();
                         window.open(this.$root.originPath + '/admi/const_puali/pdf/'+ response.data.folio, '_blank');
+                        window.location.href = `${this.$root.originPath}/admi/certificado/`;
                     })
                     .catch(error => {
                         alert("Error al generar certificado.");

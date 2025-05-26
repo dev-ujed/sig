@@ -4,7 +4,7 @@
             <button id="user-bar-btn" class="user-bar-admin__btn" @click="$emit('toggle-sidebar')">
                 {{ isSidebarOpen ? ' ☰ ' : ' ☰' }}
                 <span class="user-bar-admin__btn-text">S.I.G</span>
-                <span class="user-bar-admin__btn-text-large">Sistema de Indicadores y Monitoreo</span>
+                <span class="user-bar-admin__btn-text-large">Sistema Integral de Gestión</span>
             </button>
             <div class="user-bar-admin__profile">
                 <div class="user-bar-admin__avatar-container">
