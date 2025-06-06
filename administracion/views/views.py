@@ -18,13 +18,18 @@ from django.db.models.functions import Coalesce
 import hashlib
 import random
 import json
+from django.conf import settings
+
 # Create your views here.
 
 def home(request):
-	if request.method == 'GET':
-		if request.user.is_authenticated:
-			print('holi')
-		return render(request, 'admin/home.html')
+    request.session['debug'] = settings.DEBUG
+    
+    if request.method == 'GET':
+        request.session.get('debug', 'valor por defecto')
+        if request.user.is_authenticated:
+            print('holi')
+        return render(request, 'admin/home.html')
 	
 def certificadosIndex(request):
     if request.method == 'GET':

@@ -4,10 +4,13 @@ import { djangoVitePlugin } from 'django-vite-plugin'
 
 export default defineConfig(({ command }) => ({
     plugins: [
-        djangoVitePlugin([
-            'resources/js/main.js',
-            'resources/css/main.scss',
-        ]),
+        djangoVitePlugin({
+            input: [
+                'resources/js/main.js',
+                'resources/css/main.scss',
+            ],
+            root: '.' 
+        }),
         vue({
             template: {
                 transformAssetUrls: {
@@ -44,12 +47,14 @@ export default defineConfig(({ command }) => ({
         },
     },
     build: {
+        outDir: 'dist',
+        manifest: true,
         rollupOptions: {
             output: {
                 manualChunks(id) {
                     if (id.includes('node_modules')) return 'vendor';
                 },
             }
-        }
-    }
+        },
+    },
 }));
