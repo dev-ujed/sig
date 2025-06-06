@@ -203,3 +203,58 @@ LOGIN_EXEMPT_URLS = [
     '/login/',             
     '/custom_logout/',           
 ]
+
+import sys
+
+
+DJANGO_VITE_PLUGIN = {
+    'WS_CLIENT': '@vite/client',
+    'DEV_MODE': DEBUG,
+    'BUILD_DIR': 'dist',
+    'MANIFEST': 'dist/.vite/manifest.json',
+    'BUILD_URL_PREFIX': 'dist',
+    'JS_ATTRS': {
+        'type': 'module'
+    },
+    'CSS_ATTRS': {
+        'rel': 'stylesheet',
+        'type': 'text/css'
+    },
+    'STATIC_LOOKUP': True
+}
+
+import sys
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # importante para no eliminar los logs de Django
+
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',  # o 'ERROR', según lo que quieras mostrar
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+        },
+    },
+
+    'formatters': {
+        'verbose': {
+            'format': '[{levelname}] {asctime} {name}: {message}',
+            'style': '{',
+        },
+    },
+
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',  # muestra solo errores de Django
+            'propagate': True,
+        },
+        'myapp': {  # reemplaza 'myapp' con el nombre de tu app
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+            'formatter': 'verbose',
+        },
+    }
+}

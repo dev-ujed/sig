@@ -7,6 +7,7 @@ venv/
 .env
 static/css/*
 static/js/*
+dist/
 npm-debug.log
 yarn-error.log
 static/tramites/*
