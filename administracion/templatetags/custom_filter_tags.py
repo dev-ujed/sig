@@ -145,9 +145,17 @@ def menu(request):
             dbmenu = list(dbmenu) + list(menu_admon)
     return dbmenu
 
+import os
+import json
+import hashlib
+from django import template
+from django.conf import settings
+
+register = template.Library()
+
 @register.simple_tag
 def vite_assets(path):
-    manifest_path = os.path.join(settings.BASE_DIR, 'dist', '.vite', 'mix-manifest.json')
+    manifest_path = os.path.join(settings.BASE_DIR, 'static', '.vite', 'mix-manifest.json')
 
     try:
         with open(manifest_path, 'r') as f:
@@ -156,14 +164,33 @@ def vite_assets(path):
         entry = manifest.get(path)
 
         if not entry:
-            return settings.STATIC_URL + path  
+            return ''
 
         versioned_file = entry.get('file')
+        if not versioned_file:
+            return ''
 
-        if versioned_file:
-            return settings.STATIC_URL + versioned_file.lstrip('/')
+        file_url = settings.STATIC_URL + versioned_file.lstrip('/')
+        tag = ''
 
-        return settings.STATIC_URL + path
-    
+        # Opcional: obtener hash SHA-384 si tienes acceso al archivo local
+        file_path = os.path.join(settings.BASE_DIR, 'static', 'dist', '.vite', versioned_file.lstrip('/'))
+        integrity = ''
+        try:
+            with open(file_path, 'rb') as asset:
+                digest = hashlib.sha384(asset.read()).digest()
+                integrity = 'sha384-' + digest.encode('base64').decode('utf-8').strip()
+        except FileNotFoundError:
+            pass  # Puedes loggear o manejar esto si es importante
+
+        crossorigin = 'anonymous'
+
+        if versioned_file.endswith('.css'):
+            tag = f'<link rel="stylesheet" type="text/css" href="{file_url}" crossorigin="{crossorigin}" integrity="{integrity}"/>'
+        elif versioned_file.endswith('.js'):
+            tag = f'<script type="module" src="{file_url}" crossorigin="{crossorigin}" integrity="{integrity}"></script>'
+
+        return tag
+
     except FileNotFoundError:
-        return settings.STATIC_URL + path
+        return ''

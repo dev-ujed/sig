@@ -210,9 +210,9 @@ import sys
 DJANGO_VITE_PLUGIN = {
     'WS_CLIENT': '@vite/client',
     'DEV_MODE': DEBUG,
-    'BUILD_DIR': 'dist',
-    'MANIFEST': 'dist/.vite/manifest.json',
-    'BUILD_URL_PREFIX': 'dist',
+    'BUILD_DIR': 'static/dist',
+    'MANIFEST': 'static/dist/.vite/manifest.json',
+    'BUILD_URL_PREFIX': 'static/dist',
     'JS_ATTRS': {
         'type': 'module'
     },

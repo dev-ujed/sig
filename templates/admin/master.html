@@ -10,8 +10,20 @@
     <title>SIG UJED</title>	
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
     {% if request.session.debug == False %}
-      {% vite_assets 'resources/js/main.js' %}
-      {% vite_assets 'resources/css/main.scss' %}
+      {% comment %} 
+      <!-- CSS -->
+      {{ vite_assets('resources/css/app.css')|safe }}
+
+      <!-- JS -->
+      {{ vite_assets('resources/js/app.js')|safe }}
+
+      <!-- Imagen -->
+      <img src="{{ vite_assets('resources/images/logo.svg') }}" alt="Logo" /> 
+      {% endcomment %}
+      
+      {{ vite_assets('resources/css/main.scss')|safe }}
+      {{ vite_assets('resources/js/main.js')|safe }}
+
     {% else %}
       {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
     {% endif %}

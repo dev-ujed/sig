@@ -47,7 +47,7 @@ export default defineConfig(({ command }) => ({
         },
     },
     build: {
-        outDir: 'dist',
+        outDir: 'static/dist',
         manifest: true,
         rollupOptions: {
             output: {
