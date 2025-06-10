@@ -9,8 +9,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIG UJED</title>	
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
-	  {% vite %}
-    {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
+    {% if request.session.debug == False %}
+      {% comment %} 
+      <!-- CSS -->
+      {{ vite_assets('resources/css/app.css')|safe }}
+
+      <!-- JS -->
+      {{ vite_assets('resources/js/app.js')|safe }}
+
+      <!-- Imagen -->
+      <img src="{{ vite_assets('resources/images/logo.svg') }}" alt="Logo" /> 
+      {% endcomment %}
+      
+      {% comment %} {{ vite_assets('resources/css/main.scss')|safe }}
+      {{ vite_assets('resources/js/main.js')|safe }} {% endcomment %}
+      {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
+
+    {% else %}
+      {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
+    {% endif %}
   </head>
   <body data-root="{{SITE_URL}}">
     <div id="user" 
@@ -27,6 +44,7 @@
         {% block content %}
       
         {% endblock %}
+
       </admin>
     </div>
   </body>

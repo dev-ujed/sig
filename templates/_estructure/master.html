@@ -1,5 +1,7 @@
 {% load vite %}
 {% load static %}
+{% load custom_filter_tags %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,8 +9,12 @@
 	  <meta name="csrf-token" content="{{ csrf_token }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIE UJED</title>	
-	  {% vite %}
-    {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
+	  {% if request.session.debug == False %}
+      {{ vite_assets('resources/css/main.scss')|safe }}
+      {{ vite_assets('resources/js/main.js')|safe }}
+    {% else %}
+      {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
+    {% endif %}
   </head>
   <body data-root="{{SITE_URL}}">
     <div id="dashboard">
