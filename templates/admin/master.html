@@ -21,8 +21,9 @@
       <img src="{{ vite_assets('resources/images/logo.svg') }}" alt="Logo" /> 
       {% endcomment %}
       
-      {{ vite_assets('resources/css/main.scss')|safe }}
-      {{ vite_assets('resources/js/main.js')|safe }}
+      {% comment %} {{ vite_assets('resources/css/main.scss')|safe }}
+      {{ vite_assets('resources/js/main.js')|safe }} {% endcomment %}
+      {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
 
     {% else %}
       {% vite 'resources/css/main.scss' 'resources/js/main.js' %}

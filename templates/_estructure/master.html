@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIE UJED</title>	
 	  {% if request.session.debug == False %}
-      {% vite_assets 'resources/js/main.js' %}
-      {% vite_assets 'resources/css/main.scss' %}
+      {{ vite_assets('resources/css/main.scss')|safe }}
+      {{ vite_assets('resources/js/main.js')|safe }}
     {% else %}
       {% vite 'resources/css/main.scss' 'resources/js/main.js' %}
     {% endif %}

@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('admi/', include(('administracion.urls', 'administracion'), namespace='administracion')),
     path('accounts/', include('allauth.urls')), 
+    path('files/', include('django_vite_plugin.urls')),
 ]
