@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from "@vitejs/plugin-vue";
-import { djangoVitePlugin } from 'django-vite-plugin'
 
 export default defineConfig(({ command }) => ({
     plugins: [
@@ -47,8 +46,12 @@ export default defineConfig(({ command }) => ({
                 manualChunks(id) {
                     if (id.includes('node_modules')) return 'vendor';
                 },
+            },
+            input: {
+                js: 'resources/js/main.js',
+                css: 'resources/css/main.scss',
             }
         },
     },
-    base: "/static/",
+    base: "/assets/",
 }));

@@ -161,10 +161,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # o como tú lo tengas
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), BASE_DIR / "assets"] 
+ 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -204,8 +201,11 @@ LOGIN_EXEMPT_URLS = [
     '/custom_logout/',           
 ]
 
+STATIC_URL = '/assets/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # o como tú lo tengas
+STATICFILES_DIRS = [BASE_DIR / "assets"]
 
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / "assets"
-DJANGO_VITE_MANIFEST_PATH = BASE_DIR / "assets" / "manifest.json"
+DJANGO_VITE_MANIFEST_PATH = BASE_DIR / "assets" / ".vite" / "manifest.json"
 DJANGO_VITE_DEV_MODE = DEBUG
 DJANGO_VITE_DEV_SERVER_PORT = 5173
