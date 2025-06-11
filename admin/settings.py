@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'django_vite_plugin',
+    'django_vite',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -164,7 +164,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # o como tú lo tengas
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), BASE_DIR / "assets"] 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -204,57 +204,8 @@ LOGIN_EXEMPT_URLS = [
     '/custom_logout/',           
 ]
 
-import sys
 
-
-DJANGO_VITE_PLUGIN = {
-    'WS_CLIENT': '@vite/client',
-    'DEV_MODE': DEBUG,
-    'BUILD_DIR': 'static/dist',
-    'MANIFEST': 'static/dist/.vite/manifest.json',
-    'BUILD_URL_PREFIX': 'static/dist',
-    'JS_ATTRS': {
-        'type': 'module'
-    },
-    'CSS_ATTRS': {
-        'rel': 'stylesheet',
-        'type': 'text/css'
-    },
-    'STATIC_LOOKUP': True
-}
-
-import sys
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,  # importante para no eliminar los logs de Django
-
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',  # o 'ERROR', según lo que quieras mostrar
-            'class': 'logging.StreamHandler',
-            'stream': sys.stdout,
-        },
-    },
-
-    'formatters': {
-        'verbose': {
-            'format': '[{levelname}] {asctime} {name}: {message}',
-            'style': '{',
-        },
-    },
-
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'ERROR',  # muestra solo errores de Django
-            'propagate': True,
-        },
-        'myapp': {  # reemplaza 'myapp' con el nombre de tu app
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': False,
-            'formatter': 'verbose',
-        },
-    }
-}
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "assets"
+DJANGO_VITE_MANIFEST_PATH = BASE_DIR / "assets" / "manifest.json"
+DJANGO_VITE_DEV_MODE = DEBUG
+DJANGO_VITE_DEV_SERVER_PORT = 5173

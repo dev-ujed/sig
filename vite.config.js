@@ -4,13 +4,6 @@ import { djangoVitePlugin } from 'django-vite-plugin'
 
 export default defineConfig(({ command }) => ({
     plugins: [
-        djangoVitePlugin({
-            input: [
-                'resources/js/main.js',
-                'resources/css/main.scss',
-            ],
-            root: '.' 
-        }),
         vue({
             template: {
                 transformAssetUrls: {
@@ -47,7 +40,7 @@ export default defineConfig(({ command }) => ({
         },
     },
     build: {
-        outDir: 'static/dist',
+        outDir: 'assets',
         manifest: true,
         rollupOptions: {
             output: {
@@ -57,4 +50,5 @@ export default defineConfig(({ command }) => ({
             }
         },
     },
+    base: "/static/",
 }));

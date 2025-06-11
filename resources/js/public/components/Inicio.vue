@@ -4,7 +4,7 @@
 			<div class="login__fondo"></div>
 			<div class="login__container">
 				<div class="login__img">
-					<img src="../../../../static/img/LogoUJEDvertical.png" alt="">
+					<img src="/static/img/LogoUJEDvertical.png" alt="">
 				</div>
 				<button @click="login" class="btn btn--gray google-button" id="email" name="email" >
 					<div class="google-button__icon">
