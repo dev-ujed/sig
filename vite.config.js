@@ -40,6 +40,7 @@ export default defineConfig(({ command }) => ({
     },
     build: {
         outDir: 'static/dist',
+        assetsDir: '',
         manifest: true,
         rollupOptions: {
             output: {
