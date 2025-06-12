@@ -33,7 +33,7 @@
 		},
 		methods: {
 			login(){
-				window.location.href = 'http://localhost:8000/accounts/google/login/';
+				window.location.href = this.$root.originPath + '/accounts/google/login/';
 			}
 		}
 	};
