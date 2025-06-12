@@ -201,11 +201,12 @@ LOGIN_EXEMPT_URLS = [
     '/custom_logout/',           
 ]
 
-STATIC_URL = '/assets/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # o como tú lo tengas
-STATICFILES_DIRS = [BASE_DIR / "assets"]
 
-DJANGO_VITE_ASSETS_PATH = BASE_DIR / "assets"
-DJANGO_VITE_MANIFEST_PATH = BASE_DIR / "assets" / ".vite" / "manifest.json"
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static" / "dist"
+DJANGO_VITE_MANIFEST_PATH = BASE_DIR / "static" / "dist" / ".vite" / "manifest.json"
 DJANGO_VITE_DEV_MODE = DEBUG
 DJANGO_VITE_DEV_SERVER_PORT = 5173
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]

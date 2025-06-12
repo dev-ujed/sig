@@ -39,7 +39,7 @@ export default defineConfig(({ command }) => ({
         },
     },
     build: {
-        outDir: 'assets',
+        outDir: 'static/dist',
         manifest: true,
         rollupOptions: {
             output: {
@@ -53,5 +53,5 @@ export default defineConfig(({ command }) => ({
             }
         },
     },
-    base: "/assets/",
+    base: "/static/",
 }));
