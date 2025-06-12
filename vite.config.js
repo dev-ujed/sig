@@ -41,7 +41,7 @@ export default defineConfig(({ command }) => ({
     build: {
         outDir: 'static/dist',
         assetsDir: '',
-        manifest: true,
+        manifest: "manifest.json",
         rollupOptions: {
             output: {
                 manualChunks(id) {

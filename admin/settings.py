@@ -203,7 +203,7 @@ LOGIN_EXEMPT_URLS = [
 
 
 DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static" / "dist"
-DJANGO_VITE_MANIFEST_PATH = BASE_DIR / "static" / "dist" / ".vite" / "manifest.json"
+DJANGO_VITE_MANIFEST_PATH = BASE_DIR / "static" / "dist" / "manifest.json"
 DJANGO_VITE_DEV_MODE = DEBUG
 DJANGO_VITE_DEV_SERVER_PORT = 5173
 

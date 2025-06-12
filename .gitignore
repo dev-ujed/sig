@@ -9,6 +9,7 @@ static/css/*
 static/js/*
 static/assets/
 static/.vite/
+staticfiles/
 dist/
 npm-debug.log
 yarn-error.log
