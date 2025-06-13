@@ -173,14 +173,16 @@
             },
 
             buscarConstancia() {
+                console.log(`${this.$root.originPath}/admi/datos_constancias/?buscar=${encodeURIComponent(this.buscar)}&page=${this.currentPage}&page_size=10`);
+                console.log($this.$root);
                 axios.get(`${this.$root.originPath}/admi/datos_constancias/?buscar=${encodeURIComponent(this.buscar)}&page=${this.currentPage}&page_size=10`)
                     .then(response => {
-                    this.constancias = response.data;
-                    this.totalPages = response.data.total_pages;
-                    this.calculateVisiblePages();
+                        this.constancias = response.data;
+                        this.totalPages = response.data.total_pages;
+                        this.calculateVisiblePages();
                     })
                     .catch(error => {
-                    console.error("Error al buscar constancia:", error);
+                        console.error("Error al buscar constancia:", error);
                     });
             },
 
@@ -192,7 +194,7 @@
                         this.totalPages = response.data.total_pages;
                     })
                     .catch(error => {
-                    console.error("Error al obtener la info:", error);
+                        console.error("Error al obtener la info:", error);
                 });
             },
 
