@@ -9,7 +9,7 @@ import axios from 'axios';
 
 import AlumnosCertificados from "./admin/components/certificados/AlumnosCertificados.vue";
 import Certificadoform from './admin/components/certificados/CertificadoForm.vue';
-
+import '../css/main.scss';
 window.axios = axios;
 
 function getCSRFToken() {

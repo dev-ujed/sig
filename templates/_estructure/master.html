@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SIE UJED</title>	
     {% vite_hmr_client %}
-	  {% vite_asset 'resources/css/main.scss' %}
+	  {% comment %} {% vite_asset 'resources/css/main.scss' %} {% endcomment %}
     {% vite_asset 'resources/js/main.js' %}
   </head>
   <body data-root="{{SITE_URL}}">

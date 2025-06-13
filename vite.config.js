@@ -49,8 +49,7 @@ export default defineConfig(({ command }) => ({
                 },
             },
             input: {
-                js: 'resources/js/main.js',
-                css: 'resources/css/main.scss',
+                js: 'resources/js/main.js'
             }
         },
     },
