@@ -64,7 +64,7 @@ def getEscuelas(request):
 
 		data_escuelas = list(escuelas)
 
-		return JsonResponse(data_escuelas, safe=False)
+		return JsonResponse(data_escuelas)
 	
 def getPuaali_datos_contancias(request):
     if(request.method == 'GET'):
@@ -92,14 +92,14 @@ def getPuaali_datos_contancias(request):
             'total_items': paginator.count
         }
 
-        return JsonResponse(response_data, safe=False)
+        return JsonResponse(response_data)
 	
 def getTiposConstancias(request):
 	if(request.method == 'GET'):
 		tipos_constancias = PUAALI_TIPOS_CONSTANCIAS.objects.all().values()
 		print(tipos_constancias)
 
-		return JsonResponse(list(tipos_constancias), safe=False)
+		return JsonResponse(list(tipos_constancias))
 	
 class generarConstancia(APIView):
     def post(self, request):
