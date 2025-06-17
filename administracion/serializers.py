@@ -34,7 +34,6 @@ class constPualiSerializer(serializers.ModelSerializer):
         return explicacion.nivel_explicacion
     
     def get_fecha_hoy(self, obj):
-        locale.setlocale(locale.LC_TIME, 'es_MX.UTF-8')
         fecha_actual = datetime.now()
         fecha_formateada = f"Se extiende la presente a los {fecha_actual.day} días del mes de {fecha_actual.strftime('%B')} de {fecha_actual.year}."
         return fecha_formateada
