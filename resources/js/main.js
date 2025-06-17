@@ -3,10 +3,8 @@ import Inicio from "./public/components/Inicio.vue";
 import Admin from "./admin/components/dashboard/Admin.vue";
 import Profesores from "./admin/components/Profesores.vue";
 import Navbar from "./admin/components/dashboard/Navbar.vue";
-import { SidebarMenu } from 'vue-sidebar-menu'
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 import axios from 'axios'; 
-
 import AlumnosCertificados from "./admin/components/certificados/AlumnosCertificados.vue";
 import Certificadoform from './admin/components/certificados/CertificadoForm.vue';
 import '../css/main.scss';

@@ -70,7 +70,15 @@ def getPuaali_datos_contancias(request):
     if(request.method == 'GET'):
         buscar = request.GET.get('buscar', '').strip().upper()
         #datos = PUAALI_DATOS_CONSTANCIAS.objects.all().values('folio', 'nombre_alumno', 'tipo_constancia_id', 'nivel', 'cve_escuela', 'fecha')
-        datos = PUAALI_DATOS_CONSTANCIAS.objects.select_related('tipo_constancia_id', 'cve_escuela').values('folio','nombre_alumno','nivel','calificacion','fecha',tipo_constancia_desc=F('tipo_constancia_id__tipo_constancia_desc'),escuela=F('cve_escuela__desc_escuela'))
+        datos = PUAALI_DATOS_CONSTANCIAS.objects.values(
+            'folio',
+            'nombre_alumno',
+            'nivel',
+            'calificacion',
+            'fecha',
+            tipo_constancia_desc=F('tipo_constancia_id__tipo_constancia_desc'),
+            escuela=F('cve_escuela__desc_escuela')
+        )
         resultado = []
 
         if buscar:

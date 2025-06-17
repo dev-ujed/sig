@@ -193,6 +193,7 @@ SOCIALACCOUNT_ADAPTER = 'public.adapters.CustomSocialAccountAdapter'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
+    "http://sig.ujed.mx"
 ]
 
 LOGIN_EXEMPT_URLS = [
