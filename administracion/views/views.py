@@ -67,40 +67,51 @@ def getEscuelas(request):
 		return JsonResponse(data_escuelas, safe=False)
 	
 def getPuaali_datos_contancias(request):
-    if(request.method == 'GET'):
-        buscar = request.GET.get('buscar', '').strip().upper()
-        #datos = PUAALI_DATOS_CONSTANCIAS.objects.all().values('folio', 'nombre_alumno', 'tipo_constancia_id', 'nivel', 'cve_escuela', 'fecha')
-        datos = PUAALI_DATOS_CONSTANCIAS.objects.values(
-            'folio',
-            'nombre_alumno',
-            'nivel',
-            'calificacion',
-            'fecha',
-            tipo_constancia_desc=F('tipo_constancia_id__tipo_constancia_desc'),
-            escuela=F('cve_escuela__desc_escuela')
-        )
-        resultado = []
-
-        if buscar:
-            datos = datos.filter(
-                Q(nombre_alumno__icontains=buscar) | Q(folio__icontains=buscar)
+    import traceback
+    try:
+        if request.method == 'GET':
+            buscar = request.GET.get('buscar', '').strip().upper()
+            datos = PUAALI_DATOS_CONSTANCIAS.objects.values(
+                'folio',
+                'nombre_alumno',
+                'nivel',
+                'calificacion',
+                'fecha',
+                tipo_constancia_desc=F('tipo_constancia_id__tipo_constancia_desc'),
+                escuela=F('cve_escuela__desc_escuela')
             )
 
-        datos = datos.order_by('-fecha')
+            if buscar:
+                datos = datos.filter(
+                    Q(nombre_alumno__icontains=buscar) | Q(folio__icontains=buscar)
+                )
 
-        page_number = int(request.GET.get('page', 1))
-        page_size = int(request.GET.get('page_size', 10))
-        paginator = Paginator(list(datos), page_size)
-        page = paginator.get_page(page_number)
+            datos = datos.order_by('-fecha')
 
-        response_data = {
-            'constancias': list(page.object_list),
-            'total_pages': paginator.num_pages,
-            'current_pages': page.number,
-            'total_items': paginator.count
-        }
+            page_number = int(request.GET.get('page', 1))
+            page_size = int(request.GET.get('page_size', 10))
+            paginator = Paginator(list(datos), page_size)
+            page = paginator.get_page(page_number)
 
-        return JsonResponse(response_data, safe=False)
+            # Fecha serializable
+            for d in page.object_list:
+                if hasattr(d['fecha'], 'isoformat'):
+                    d['fecha'] = d['fecha'].isoformat()
+
+            return JsonResponse({
+                'constancias': list(page.object_list),
+                'total_pages': paginator.num_pages,
+                'current_page': page.number,
+                'total_items': paginator.count
+            })
+
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+    except Exception as e:
+        return JsonResponse({
+            'error': str(e),
+            'traceback': traceback.format_exc()
+        }, status=500)
 	
 def getTiposConstancias(request):
 	if(request.method == 'GET'):
