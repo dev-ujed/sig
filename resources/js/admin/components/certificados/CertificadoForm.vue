@@ -114,10 +114,6 @@
                         this.calificacion = data.calificacion;
                         this.escuelaSeleccionada = data.escuela;
                         this.fechaActual = data.fecha;
-                        
-
-                        console.log(data);
-
                     })
                     .catch(error => {
                         console.error("Error al obtener los datos de la constancia:", error);

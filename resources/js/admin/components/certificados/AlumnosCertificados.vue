@@ -186,7 +186,6 @@
 
 
             get_constancias_datos(){
-                console.log(`${this.$root.originPath}/admi/datos_constancias/?buscar=${encodeURIComponent(this.buscar)}&page=${this.currentPage}&page_size=10`);
                 axios.get(`${this.$root.originPath}/admi/datos_constancias/?page=${this.currentPage}&page_size=10`)
                     .then(response => {
                         this.constancias = response.data;
